@@ -5,7 +5,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.optimizers import Adam
 
-# Step 1: Define the neural network
+# Step 1: Define the neural network  conda activate tensyflow
 model = Sequential()
 model.add(Dense(64, input_dim=9, activation='relu'))  # First hidden layer
 model.add(Dense(64, activation='relu'))               # Second hidden layer
