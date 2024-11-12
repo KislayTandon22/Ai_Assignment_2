@@ -1,60 +1,85 @@
 import sys
-import random
-from Ai_Assignment_2.TicTacToe import *
-"""
-You may import additional, commonly used libraries that are widely installed.
-Please do not request the installation of new libraries to run your program.
-"""
+import numpy as np
+import tensorflow as tf
+from tensorflow.keras.models import load_model
+from tensorflow.keras.utils import register_keras_serializable
+from TicTacToe import TicTacToe
+
+@register_keras_serializable()
+def mse(y_true, y_pred):
+    return tf.reduce_mean(tf.square(y_true - y_pred))
 
 class PlayerSQN:
-    def __init__(self):
+    def __init__(self, model_path='trained_sqn_model.h5'):
         """
-        Initializes the PlayerSQN class.
+        Initializes the PlayerSQN class and loads the pre-trained model.
         """
-        pass
+        try:
+            custom_objects = {'mse': mse}
+            self.model = load_model(model_path, custom_objects=custom_objects)
+            print("Model loaded successfully!")
+        except Exception as e:
+            print(f"Error: Could not load model. {e}")
+            sys.exit(1)
+    
+    def _preprocess_state(self, state):
+        """
+        Converts the state from [0,1,2] format to [-1,0,1] format for better learning.
+        """
+        processed_state = np.array(state).copy()
+        processed_state[processed_state == 2] = -1
+        return processed_state
 
     def move(self, state):
         """
-        Determines Player 2's move based on the current state of the game.
-
-        Parameters:
-        state (list): A list representing the current state of the TicTacToe board.
-
-        Returns:
-        int: The position (0-8) where Player 2 wants to make a move.
+        Selects the best move based on the current state.
         """
-        # In your final submission, PlayerSQN must be controlled by an SQN. Use an epsilon-greedy action selection policy.
-        # In this implementation, PlayerSQN is controlled by terminal input.
-        print(f"Current state: {state}")
-        action = int(input("Player 2 (You), enter your move (1-9): ")) - 1
-        return action
+        processed_state = self._preprocess_state(state)
+        valid_moves = [i for i, val in enumerate(state) if val == 0]
+        
+        q_values = self.model.predict(processed_state.reshape(1, -1), verbose=0)[0]
+        # Mask invalid moves
+        for i in range(len(q_values)):
+            if i not in valid_moves:
+                q_values[i] = float('-inf')
+        return np.argmax(q_values)
 
-
-def main(smartMovePlayer1):
+def simulate_games(smartMovePlayer1, num_games=3):
     """
-    Simulates a TicTacToe game between Player 1 (random move player) and Player 2 (SQN-based player).
+    Simulates multiple TicTacToe games and tracks the results.
 
     Parameters:
     smartMovePlayer1: Probability that Player 1 will make a smart move at each time step.
-                     During a smart move, Player 1 either tries to win the game or block the opponent.
+    num_games: Number of games to simulate.
     """
-#    random.seed(42)
     playerSQN = PlayerSQN()
-    game = TicTacToe(smartMovePlayer1,playerSQN)
-    game.play_game()
-    
-    # Get and print the reward at the end of the episode
-    reward = game.get_reward()
-    print(f"Reward for Player 2 (You): {reward}")
-    
+    wins, losses, draws = 0, 0, 0
+
+    for _ in range(num_games):
+        game = TicTacToe(smartMovePlayer1, playerSQN)
+        game.play_game()
+        
+        reward = game.get_reward()
+        if reward == 1:
+            wins += 1
+        elif reward == -1:
+            losses += 1
+        else:
+            draws += 1
+
+    print(f"Results after {num_games} games:")
+    print(f"Wins: {wins}")
+    print(f"Losses: {losses}")
+    print(f"Draws: {draws}")
+
 if __name__ == "__main__":
     try:
         smartMovePlayer1 = float(sys.argv[1])
-        assert 0<=smartMovePlayer1<=1
+        assert 0 <= smartMovePlayer1 <= 1
     except:
         print("Usage: python YourBITSid.py <smartMovePlayer1Probability>")
-        print("Example: python 2020A7PS0001.py 0.5")
-        print("There is an error. Probability must lie between 0 and 1.")
+        print("Example: python 2021A7PS2627G.py 0.5")
+        print("Error: Probability must lie between 0 and 1.")
         sys.exit(1)
     
-    main(smartMovePlayer1)
+    simulate_games(smartMovePlayer1)

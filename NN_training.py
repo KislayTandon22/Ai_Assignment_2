@@ -27,7 +27,7 @@ for _ in range(2000):
     done = np.random.choice([True, False])  # Randomly mark if episode ended
     replay_buffer.append((state, action, reward, next_state, done))
 
-# Step 4: Training Parameters
+# Step 4: Training Pāarameters
 BATCH_SIZE = 32  # Size of mini-batch
 GAMMA = 0.99     # Discount factor
 EPOCHS = 10      # Number of training epochs
