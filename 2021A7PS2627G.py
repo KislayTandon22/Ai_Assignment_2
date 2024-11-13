@@ -44,7 +44,7 @@ class PlayerSQN:
                 q_values[i] = float('-inf')
         return np.argmax(q_values)
 
-def simulate_games(smartMovePlayer1, num_games=3):
+def simulate_games(smartMovePlayer1, num_games=20):
     """
     Simulates multiple TicTacToe games and tracks the results.
 
