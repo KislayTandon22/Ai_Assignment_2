@@ -4,6 +4,7 @@ import tensorflow as tf
 from tensorflow.keras.models import load_model
 from tensorflow.keras.utils import register_keras_serializable
 from TicTacToe import TicTacToe
+import os
 
 @register_keras_serializable()
 def mse(y_true, y_pred):
@@ -16,6 +17,8 @@ class PlayerSQN:
         """
         try:
             custom_objects = {'mse': mse}
+            current_dir = os.path.dirname(os.path.abspath(__file__))
+            model_path = os.path.join(current_dir, "2021A7PS2627G_MODEL.h5")
             self.model = load_model(model_path, custom_objects=custom_objects)
             print("Model loaded successfully!")
         except Exception as e:
