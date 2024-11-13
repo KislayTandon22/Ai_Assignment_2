@@ -7,6 +7,7 @@ from TicTacToe import TicTacToe
 import os
 
 @register_keras_serializable()
+@tf.function(reduce_retracing=True)
 def mse(y_true, y_pred):
     return tf.reduce_mean(tf.square(y_true - y_pred))
 
