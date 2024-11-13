@@ -12,14 +12,14 @@ def mse(y_true, y_pred):
     return tf.reduce_mean(tf.square(y_true - y_pred))
 
 class PlayerSQN:
-    def __init__(self, model_path='trained_sqn_model_action_episode_800.h5'):
+    def __init__(self,model="2021A7PS2627G_MODEL.h5"):
         """
         Initializes the PlayerSQN class and loads the pre-trained model.
         """
         try:
             custom_objects = {'mse': mse}
             current_dir = os.path.dirname(os.path.abspath(__file__))
-            model_path = os.path.join(current_dir, "2021A7PS2627G_MODEL.h5")
+            model_path = os.path.join(current_dir,model)
             self.model = load_model(model_path, custom_objects=custom_objects)
             print("Model loaded successfully!")
         except Exception as e:
