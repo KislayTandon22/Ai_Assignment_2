@@ -38,7 +38,7 @@ def check_model(model_name):
     return model_name, results
 
 if __name__ == "__main__":
-    model_names = ["model1.h5", "model3.h5", "model4.h5", "model5.h5", "model7.h5", "model8.h5"]
+    model_names = [ "model5.h5", "model8.h5","model9.h5",  "model11.h5","model10.h5"]
     all_results = []
     for model_name in model_names:
         all_results.append(check_model(model_name))
