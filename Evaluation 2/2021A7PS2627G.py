@@ -12,7 +12,7 @@ def mse(y_true, y_pred):
     return tf.reduce_mean(tf.square(y_true - y_pred))
 
 class PlayerSQN:
-    def __init__(self,model="2021A7PS2627G_MODEL.h5"):
+    def __init__(self,model="model21.h5"):
         """
         Initializes the PlayerSQN class and loads the pre-trained model.
         """

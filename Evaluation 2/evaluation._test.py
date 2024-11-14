@@ -21,9 +21,11 @@ def check_model(model_name):
                0.8: {'wins': 0, 'losses': 0, 'draws': 0},
                1: {'wins': 0, 'losses': 0, 'draws': 0}}
 
-    for seed in range(1000):
+    random_seeds = random.sample(range(1000, 10000), 100)
+
+    for seed in range(1,1000):
         random.seed(seed)
-        print(f"Testing with seed value: {seed} ({seed+1}/1000)")
+        print(f"Testing with seed value: {seed}")
         playerSQN = my_module.PlayerSQN(model_name)
         for smartness in results.keys():
             game_reward = play_full_game(playerSQN, smartness)
@@ -38,7 +40,7 @@ def check_model(model_name):
     return model_name, results
 
 if __name__ == "__main__":
-    model_names = [  "model12.h5", "model13.h5"]
+    model_names = ["model16.h5", "model17.h5"]
     all_results = []
     for model_name in model_names:
         all_results.append(check_model(model_name))
