@@ -7,7 +7,7 @@ import os
 from TicTacToe import *
 
 
-rand_seed_list = [random.randint(1,100),random.randint(1,100),random.randint(1,100)]  # list of random seens being used for checking
+rand_seed_list = [random.randint(1,10000),random.randint(1,10000),random.randint(1,10000)]  # list of random seens being used for checking
 
 
 def play_full_game(playerSQN, smartness):
