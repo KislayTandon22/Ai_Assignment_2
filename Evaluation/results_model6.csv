@@ -1,0 +1,16 @@
+Model,Smartness,Wins,Losses,Draws
+model6_retrain.h5,0,68,10,22
+model6_retrain.h5,0.8,19,37,44
+model6_retrain.h5,1,8,44,48
+model6_retrain_retrain.h5,0,87,2,11
+model6_retrain_retrain.h5,0.8,24,20,56
+model6_retrain_retrain.h5,1,10,23,67
+model6_retrain_retrain_retrain.h5,0,75,4,21
+model6_retrain_retrain_retrain.h5,0.8,29,27,44
+model6_retrain_retrain_retrain.h5,1,9,33,58
+model6_retrain_retrain_retrain_retrain.h5,0,83,6,11
+model6_retrain_retrain_retrain_retrain.h5,0.8,29,28,43
+model6_retrain_retrain_retrain_retrain.h5,1,9,32,59
+model6_retrain_retrain_retrain_retrain_retrain.h5,0,91,4,5
+model6_retrain_retrain_retrain_retrain_retrain.h5,0.8,31,28,41
+model6_retrain_retrain_retrain_retrain_retrain.h5,1,7,32,61

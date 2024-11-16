@@ -7,7 +7,7 @@ import os
 from TicTacToe import *
 
 
-rand_seed_list = [random.randint(1,10000),random.randint(1,10000),random.randint(1,10000)]  # list of random seens being used for checking
+rand_seed_list = random.sample(range(1, 10000), 10)  # list of random seens being used for checking
 
 
 def play_full_game(playerSQN, smartness):
@@ -16,33 +16,28 @@ def play_full_game(playerSQN, smartness):
     game = TicTacToe(smartness, playerSQN)
     game.play_game()
     reward = game.get_reward()
-
+    tip=0
     if reward == 1:
         print("\033[32mTest passed\033[0m")
+        tip=3
     elif reward == 0:
         print("\033[32mTIE\033[0m")
+        tip=1
     else:
         print("\033[31mTest failed\033[0m")
+        tip=0.5
 
-    return reward
+    return tip
 
 
 def print_marks(smartness, total_reward):
     """Prints the marks based on the total reward"""
     marks = 0
     print(f"Total reward: {total_reward} for smartness: {smartness}")
-
-    if total_reward > 0:
-        print("\033[32mMarks 4\033[0m")
-        marks = 4
-    elif total_reward == 0:
-        print("\033[32mMarks 2.5\033[0m")
-        marks = 2.5
-    elif total_reward < 0:
-        print("\033[32mMarks 1.5\033[0m")
-        marks = 1.5
-    else:
-        print("\033[31mTest failed\033[0m")
+    marks=total_reward/30*4
+    
+    print(f"\033[32mMarks result\033[0m")
+    
 
     return marks
 
