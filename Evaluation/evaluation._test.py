@@ -22,7 +22,7 @@ def check_model(model_name):
                0.8: {'wins': 0, 'losses': 0, 'draws': 0},
                1: {'wins': 0, 'losses': 0, 'draws': 0}}
 
-    random_seeds = random.sample(range(1000, 10000), 100)
+    random_seeds = random.sample(range(1000, 10000), 1000)
 
     for seed in random_seeds:
         random.seed(seed)
@@ -41,7 +41,7 @@ def check_model(model_name):
     return model_name, results
 
 if __name__ == "__main__":
-    model_names = [ "model6_retrain.h5", "model6_retrain_retrain.h5", "model6_retrain_retrain_retrain.h5", "model6_retrain_retrain_retrain_retrain.h5","model6_retrain_retrain_retrain_retrain_retrain.h5"]
+    model_names = [ "model6_retrain_retrain_retrain.h5", "model6_retrain_retrain_retrain_retrain.h5","model6_retrain_retrain_retrain_retrain_retrain.h5"]
     
     all_results = []
 
