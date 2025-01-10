@@ -28,6 +28,8 @@ The project files are organized under the `submission/` folder:
 - `submission/TicTacToe.py`: Game logic for Tic-Tac-Toe.
 - `submission/2021A7PS2627G_MODEL.h5`: Pretrained model for the SQN agent.
 
+Original training was performed in a Jupyter Notebook named `all_model_training.ipynb` to maintain detailed records of experiments and results.
+
 ---
 
 ## Requirements
@@ -113,4 +115,4 @@ python submission/2021A7PS2627G.py <smartMovePlayer1Probability>
 
 ## Acknowledgments
 
-This project was developed as part of coursework for **2021A7PS2627G - Kislay Ranjan Nee Tandon**.
+This project was developed as part of coursework for Aritificial Intelligence **2021A7PS2627G - Kislay Ranjan Nee Tandon**.
